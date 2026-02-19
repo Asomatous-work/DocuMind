@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuMind — AI Document Intelligence</title>
+  <meta name="description" content="AI-powered OCR chat interface with local LLM intelligence. Scan, capture, and understand any document." />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>" />
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         SIDEBAR — Documents & Upload
+         ════════════════════════════════════════════════════════════════════ -->
+    <aside class="sidebar" id="sidebar">
+      
+      <!-- Brand -->
+      <div class="sidebar-header">
+        <div class="logo">🔍</div>
+        <div class="brand">
+          <h1>DocuMind</h1>
+          <span>AI Document Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Upload Drop Zone -->
+      <div class="upload-zone-wrapper">
+        <div class="upload-zone" id="uploadZone">
+          <span class="upload-icon">📄</span>
+          <div class="upload-text">
+            <strong>Drop documents here</strong><br />
+            or click to browse
+          </div>
+          <div class="upload-hint">JPG, PNG, WebP, BMP, TIFF</div>
+          <input type="file" id="fileInput" accept="image/*" multiple style="display:none" />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="action-btn primary" id="captureBtn" title="Open camera to capture document">
+          <span class="btn-icon">📸</span>
+          Capture
+        </button>
+        <button class="action-btn" id="uploadBtn" title="Browse files to upload">
+          <span class="btn-icon">📁</span>
+          Upload
+        </button>
+      </div>
+
+      <!-- Documents List -->
+      <div class="documents-section">
+        <div class="documents-header">
+          <h3>Knowledge Base</h3>
+          <span class="doc-count" id="docCount">0 docs</span>
+        </div>
+
+        <div class="documents-list" id="documentsList">
+          <!-- Empty state -->
+          <div class="empty-docs" id="emptyDocs">
+            <div class="empty-icon">📭</div>
+            <p>No documents yet.<br />Upload or capture a document to get started.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Footer -->
+      <div class="sidebar-footer">
+        <div class="stat-chip">
+          <span>📊</span>
+          <span class="stat-value" id="statBlocks">0</span>
+          <span>blocks</span>
+        </div>
+        <div class="stat-chip">
+          <span>🎯</span>
+          <span class="stat-value" id="statConfidence">—</span>
+          <span>avg conf</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         MAIN CHAT AREA
+         ════════════════════════════════════════════════════════════════════ -->
+    <main class="main-area">
+
+      <!-- Header -->
+      <header class="chat-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+          <div class="status-dot" id="statusDot"></div>
+          <h2>DocuMind Chat</h2>
+        </div>
+        <div class="header-actions">
+          <button class="header-btn" id="clearChatBtn" title="Clear conversation">
+            <span>🗑️</span> Clear
+          </button>
+          <button class="header-btn" id="healthBtn" title="System status">
+            <span>⚡</span> Status
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="messages-container" id="messagesContainer">
+        <div class="messages-inner" id="messagesInner">
+
+          <!-- Welcome Screen -->
+          <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-icon">🧠</div>
+            <h2>Welcome to DocuMind</h2>
+            <p>
+              Upload or capture any document — receipts, invoices, IDs, prescriptions, or handwritten notes.
+              I'll extract every word with high-accuracy OCR and store it in your knowledge base.
+              Then ask me anything about your documents.
+            </p>
+            <div class="welcome-features">
+              <div class="welcome-feature">
+                <span class="feature-icon">📸</span>
+                <div class="feature-title">Capture</div>
+                <div class="feature-desc">Use your camera to scan any document in real-time</div>
+              </div>
+              <div class="welcome-feature">
+                <span class="feature-icon">🔍</span>
+                <div class="feature-title">Extract</div>
+                <div class="feature-desc">High-accuracy OCR with advanced preprocessing</div>
+              </div>
+              <div class="welcome-feature">
+                <span class="feature-icon">💬</span>
+                <div class="feature-title">Understand</div>
+                <div class="feature-desc">Ask questions about your documents with local AI</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Input Bar -->
+      <div class="input-bar-wrapper">
+        <div class="input-bar">
+          <textarea
+            id="chatInput"
+            rows="1"
+            placeholder="Ask about your documents, or just say hello..."
+            autocomplete="off"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" title="Send message" disabled>
+            ➤
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       CAMERA MODAL
+       ════════════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="cameraModal">
+    <div class="camera-modal">
+      <div class="camera-modal-header">
+        <h3>📸 Document Scanner</h3>
+        <button class="close-modal-btn" id="closeCameraBtn">✕</button>
+      </div>
+      <div class="camera-viewport">
+        <video id="cameraVideo" autoplay playsinline></video>
+        <canvas id="cameraCanvas"></canvas>
+        <div class="scan-line"></div>
+        <div class="corner-guides"></div>
+      </div>
+      <div class="camera-actions">
+        <button class="capture-btn" id="snapBtn" title="Capture"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       DOCUMENT DETAIL MODAL
+       ════════════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="docDetailModal">
+    <div class="doc-detail-modal" id="docDetailContent">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

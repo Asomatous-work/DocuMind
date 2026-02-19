@@ -1,0 +1,11 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.22
+easyocr==1.7.2
+Pillow==12.1.1
+opencv-python-headless==4.11.0.86
+numpy>=1.26.4,<2.0
+ollama==0.6.1
+aiofiles==25.1.0
+python-dateutil==2.9.0.post0
+httpx==0.28.1

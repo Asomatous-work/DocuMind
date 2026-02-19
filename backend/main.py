@@ -25,6 +25,11 @@ OLLAMA_URL = "http://127.0.0.1:11434"
 
 # Late imports to avoid slow startup logs before config
 from ocr.engine import OCREngine
+from ocr.document_extractor import (
+    extract_document,
+    DOCUMENT_MIME_TYPES,
+    DOCUMENT_EXTENSIONS,
+)
 from knowledge.store import KnowledgeStore
 from agent.ollama_client import OllamaAgent
 
@@ -67,7 +72,7 @@ app.mount(
 async def serve_frontend():
     """Serve the main chat interface."""
     index_path = os.path.join(FRONTEND_DIR, "index.html")
-    with open(index_path, "r") as f:
+    with open(index_path, "r", encoding="utf-8") as f:
         return HTMLResponse(content=f.read())
 
 
@@ -107,19 +112,32 @@ async def upload_and_process(
     source_type: str = Form("upload"),
 ):
     """
-    Upload a document image and extract text via OCR.
+    Upload a document image, PDF, or Word document and extract text.
+    Images are processed via OCR; PDFs and DOCX files use direct text extraction.
     Stores the result in the knowledge base.
     """
-    # Validate file type
-    allowed_types = [
+    import os
+    ext = os.path.splitext((file.filename or "").lower())[1]
+
+    # Determine if this is a native document or image
+    is_document = (
+        file.content_type in DOCUMENT_MIME_TYPES
+        or ext in DOCUMENT_EXTENSIONS
+    )
+
+    # Image MIME types (OCR path)
+    image_types = [
         "image/jpeg", "image/png", "image/webp", "image/bmp",
         "image/tiff", "image/gif",
     ]
-    if file.content_type not in allowed_types:
+    image_extensions = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff", ".tif", ".gif"}
+    is_image = file.content_type in image_types or ext in image_extensions
+
+    if not is_document and not is_image:
+        allowed = "Images (JPG, PNG, WebP, BMP, TIFF), PDF, DOCX"
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported file type: {file.content_type}. "
-                   f"Allowed: {', '.join(allowed_types)}",
+            detail=f"Unsupported file type: {file.content_type or ext}. Allowed: {allowed}",
         )
 
     # Read file bytes
@@ -136,21 +154,30 @@ async def upload_and_process(
         f.write(file_bytes)
 
     logger.info(f"📤 Processing upload: {file.filename} ({file_size} bytes)")
+    logger.info(f"📤 Processing upload: {file.filename} ({file_size} bytes, type={'document' if is_document else 'image'})")
 
-    # Run OCR
     try:
-        ocr_result = ocr_engine.extract_text(
-            file_bytes, source_type=source_type, detail=True
-        )
+        if is_document:
+            # Direct text extraction — no OCR
+            ocr_result = extract_document(
+                file_bytes,
+                filename=file.filename or "unknown",
+                mime_type=file.content_type or "",
+            )
+        else:
+            # Image — run through OCR engine
+            ocr_result = ocr_engine.extract_text(
+                file_bytes, source_type=source_type, detail=True
+            )
     except Exception as e:
-        logger.error(f"OCR failed: {e}")
-        raise HTTPException(status_code=500, detail=f"OCR processing failed: {str(e)}")
+        logger.error(f"Text extraction failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Text extraction failed: {str(e)}")
 
     # Store in knowledge base
     document = knowledge_store.add_document(
         filename=file.filename or "unknown",
         extracted_text=ocr_result["text"],
-        source_type=source_type,
+        source_type=ocr_result.get("source_type", source_type),
         ocr_confidence=ocr_result["avg_confidence"],
         ocr_blocks=ocr_result["blocks"],
         file_size=file_size,

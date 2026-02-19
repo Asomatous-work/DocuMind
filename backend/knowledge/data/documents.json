@@ -92,12 +92,2794 @@
           "label": "S15",
           "text": "Most successful attacks start with vulnerability probing: Allowing such probes to continue can raise the likelihood of a successful exploit to nearly 10O%."
         }
-      ]
+      ],
+      "file_size_bytes": 80371,
+      "mime_type": "image/png",
+      "created_at": "2026-02-19T04:49:34.823051+00:00",
+      "updated_at": "2026-02-19T04:49:34.823051+00:00",
+      "tags": [],
+      "notes": ""
+    },
+    {
+      "id": "0b34c493",
+      "filename": "GIGW3.0-pg7-21.pdf",
+      "extracted_text": "--- Page 1 ---\n1. Introduction\nn recent years, digital technologies have \nincreasingly contributed to economic \ngrowth and citizen empowerment. \nThese \ntechnologies \nhave \nbecome \nubiquitous in everyday life and enable \npeople to access various services from the \ncomfort of their homes. Government has \nestablished web presence through multiple \nwebsites, web portals, web applications and \nmobile apps that oﬀer information and services \nto the public. However, inconsistency in \nconventions, \nlayout \nstandards, \nnavigation \nstrategies and technologies adopted can \nreduce the eﬀectiveness of websites/apps.\nIn this context, the National Informatics Centre \n(NIC) formulated the Guidelines for Indian \nGovernment Websites (GIGW) in the year 2009. \nGIGW aims to ensure quality and accessibility of \ngovernment guidelines, by oﬀering guidance \non desirable practices covering the entire \nlifecycle of websites, web portals and web \napplications, right from conceptualisation and \ndesign to their development, maintenance and \nmanagement. \nThe \nDepartment \nof \nAdministrative Reforms and Public Grievances \nmade the same a part of the Central Secretariat \nManual of Oﬃce Procedure. \nThe second version of GIGW (GIGW 2.0) was \ndeveloped in 2019, taking into account \nfeedback from and consultations with industry, \nI\nIntroduction\n1.0\n7\n\n--- Page 2 ---\n1. Introduction\nsociety and government organisations. GIGW \n2.0 took note of the standards evolved by \ninternational bodies like the world-wide web \nconsortium (W3C) and advancements in \ntechnology. It also included guidance on mobile \napps. \nThis version is the third version of GIGW (GIGW \n3.0). While the earlier versions were formulated \nin-house with external inputs, GIGW 3.0 has \nbeen formulated jointly with Standardisation \nTesting \nand \nQuality \nCertiﬁcation \n(STQC) \nDirectorate of the Ministry of Electronics and \nInformation Technology and Indian Computer \nEmergency Response Team (CERT-In), so that \nthe experience of conformity with GIGW \ngathered by the STQC Directorate auditors and \nthe cybersecurity experience and knowledge of \nCERT-In also inform the GIGW. As in earlier \nversions, GIGW 3.0 too has also been formulated \nin association with industry and experts.\nThe key thrust of GIGW 3.0 is on oﬀering speciﬁc \nguidance to government organisations on how \nto improve the user interface and user \nexperience (UI and UX), by incorporating \nfeatures such as intuitive page loading (using AI \nand analytics) based on user journey and user \nproﬁle, \nusing \nstate-of-the-art \ncontent \nmanagement \nsystem \n(CMS), \nuser-centric \ninformation \narchitecture \n(IA), \ncentralised \nmonitoring dashboard to identify and provide \nalerts \non \nnon-conformity \nand \ntechnical \nenablement of all content creators and \npublishers.\nGIGW 3.0 also signiﬁcantly enhances the \nguidance on the accessibility and usability of \nmobile apps, especially by oﬀering speciﬁc \nguidance to government organisations on how \nto leverage public digital infrastructure devised \nfor whole-of-government delivery of services, \nbeneﬁts and information. These cover aspects \nsuch as API level integration for use of \nintegration with social media, India Portal, \nDigiLocker, Aadhaar-based identity, single \nsign-on, data sharing in open formats on the \ngovernment’s data platform, government’s \nscheme discovery platform, government’s \ncitizen engagement platform MyGov, AI-based \nIndian language translation tools, seamless \ncontent/data \naccess \nacross \nweb-based \nsolutions of government organisations. GIGW \n3.0 oﬀers upgraded guidelines on accessibility \nof websites and apps, with a view to make \naccess to cyberspace more inclusive. In view of \nincorporation of comprehensive guidance in \nthis version on apps as well (in addition to \nwebsites), this version is titled “Guidelines for \nIndian \nGovernment Websites \nand \nApps”. \nHowever, since the acronym GIGW gained wide \ncurrency, the acronym has been retained, with \nthe letter “W” being signifying “Websites and \nApps”.\nA chapter on cybersecurity, formulated by \nCERT-In, has also been incorporated so that \nGIGW can serve as a single point of reference on \nall the relevant aspects — quality, accessibility \nand security — relating to websites, web \nportals, web applications and mobile apps. \nSince cybersecurity requirements undergo \ncontinuous evolution in light of emerging \nthreat \nscenarios, \nthreat \nvectors \nand \ntechnologies, \nCERT-In \ncontinuously \nissues \nupdated guidance and advisories to address the \n8\n\n--- Page 3 ---\nsame. Such guidance and advisories issued by \nCERT-In from time to time should be treated as \nupdates to the guidance contained in the \nchapter on cybersecurity and any assessments \nor audit carried out with reference to GIGW 3.0 \nshould also be cognizant of the same. Further, \nwhile government organisations may continue \nto establish conformity with GIGW 3.0 by \nobtaining Certiﬁed Quality Website (CQW) \ncertiﬁcation from the STQC Directorate, the \ncertiﬁcation of cybersecurity aspects by STQC \nmay be done on the basis of the “safe to host” \ncertiﬁcate issued by the cybersecurity auditors \nempanelled by CERT-In/STQC or the auditors of \nSTQC or NIC.\nTo make the guidelines more readily usable, \nwhich entity/person has a role in implementing \na particular guideline has been identiﬁed in \nevery guideline. Thus, each guideline speciﬁes \nwhether the same is to be acted upon by the \ngovernment organisation concerned or the \ndeveloper or the evaluators.\nThe eﬀectiveness of GIGW 3.0 in enhancing ease \nof living through various web-based initiatives \nof the government would depend on their \neﬀective implementation in letter and spirit by \nall \ngovernment \norganisations \nand \ntheir \nimplementation \nand \nevaluation \npartners. \nGovernment organisations are expected to \ncarefully assess their existing websites, web \nportals, web applications and mobile apps \nagainst GIGW 3.0, identify areas requiring \nimprovement, \ndraw \nup \ntime \nbound \nimplementation plans to achieve conformity \nwith GIGW 3.0 and obtain CQW certiﬁcation \nfrom the STQC Directorate. Similarly, websites, \nweb portals, web applications and mobile apps \nthat are at the design or implementation stage \nmay also be reviewed to ensure that their \ndesign, architecture, development and scope of \naudit conform to GIGW 3.0 and requisite \napprovals, resources etc. are tied up to ensure \nthis.\nWhile GIGW embodies general guidance for \ngovernment websites, web portals, web \napplications and mobile apps, particular \nwebsite/app use cases may require adoption of \nhigher \nnorms \nand \nspeciﬁc \ntechnologies. \nGovernment organisations may keep this in \nmind \nwhile \nformulating \ntheir \ndesign, \narchitecture and scope and may consult NIC in \ncase they desire technical advice in the matter.\n1. Introduction\n9\n\n--- Page 4 ---\nScope\nand\nobjective\n\u001d\u001e\nGUIDELINES FOR INDIAN GOVERNMENT \nWEBSITES AND APPS\n\n--- Page 5 ---\n2    Scope and objective\n      2.1  Conformity to guidelines\n      2.2  How to use GIGW\n\n--- Page 6 ---\n2. Scope and objective\nhis \ndocument \nrecommends \npolicies and guidelines for Indian \nGovernment \nwebsites \nand \nApplications at any organisational \nlevel and belonging to both \nCentral \nGovernment \nas \nwell \nas \nState \nGovernments \n(including \ndistrict \nadministrations and local governments) for \nmaking \nIndian \ngovernment \nwebsites/apps \nuser-centric, more user-friendly and secure. \nConformity with these guidelines will ensure a \nhigh degree of consistency and uniformity in \nthe content coverage, presentation security \nand accessibility and promote excellence in \ngovernment solutions in the Indian web space.\nThese guidelines address common issues and \npractical \nchallenges \nthat \ngovernment \norganisations face during development and \nmanagement of their websites/apps. The \nguidelines \naim \nto \nassist \ngovernment \norganisations \nin \nensuring \nthat \ntheir \nwebsites/apps conform to a consistently high \nstandard. This is expected to enhance the trust \nlevel \nof \nthe \ncitizens \nwhile \naccessing \ngovernment \ninformation \nand \navailing \nof \nservices online.\nScope and objective\nT\n2.0\n12\n\n--- Page 7 ---\n2. Scope and objective\nThese guidelines have been framed with the objective to make the government websites/apps \nconform to the essential prerequisites of the UUU trilogy of usability, user-centricity and universal \naccessibility.\nThese guidelines are based on international standards, including ISO 23026, W3C’s Web Content \nAccessibility Guidelines (WCAG 2.1) Rights of Persons with Disabilities Act, 2016, as well as the \nInformation Technology Act, 2000. Further, the long-standing experience of the authors in the \ndesign, development and management of government websites/apps as well as their knowledge of \nthe ground realities and challenges faced by government organisations in developing and \nmanaging their websites/apps, have helped signiﬁcantly in drafting these guidelines.\nThese guidelines also form the basis for obtaining the Website Quality Certiﬁcation from the STQC \nDirectorate. \nDetails \nof \nthe \ncertiﬁcation \nscheme \nare \navailable \nat \nhttps://www.stqc.gov.in/website-quality-certiﬁcation-0.\nThese guidelines are being circulated amongst all Indian government organisations at all levels \n(Central, State and district/local). These should be followed and implemented on priority so that \nthe overall aim of making all Indian government websites/apps citizen-focused and user-friendly \nmay be realised.\nConformity to guidelines\n2.1\nGovernment organisations are expected to read, understand and implement these guidelines on all \nof their web-based initiatives. In other words, all the websites/apps owned by government \norganisations must comply with these guidelines. It is recommended that browser-based intranet \napplications should also follow these guidelines. Depending upon their speciﬁc requirements, \ngovernment organisations may draw up short-term and long-term timebound implementation \nplans for achieving conformity with these guidelines.\nHow to use GIGW 3.0\n2.2\n13\n\n--- Page 8 ---\nNew \nfeatures \nof GIGW 3.0\n\u001c\u001e\nGUIDELINES FOR INDIAN GOVERNMENT \nWEBSITES AND APPS\n\n--- Page 9 ---\n3    New features of GIGW 3.0\n      3.1    Structure\n      3.2   Quality\n      3.3   Accessibility\n      3.4   Cybersecurity\n      3.5   Lifecycle management\n      3.6   Risk factors and their mitigation\n\n--- Page 10 ---\n3. New features of GIGW 3.0\nT\nhe new version of the guidelines has several enhancements to make it more user \ncentric, accessible, secure and at par with the global best practices and latest \ntechnological benchmarks. This version was reorganised to ease adoption and \nimplementation and ensure wider conformity with GIGW. The following major \nenhancements have been included in the current version.\nThe new version of the guidelines is structured so as to reduce ambiguity and provide clarity on the \nroles and responsibilities of the implementers. The guidelines are structured under the following \nheads:\n(a) Statement: Requirement or checkpoint to\nmeet the particular guideline.\n(b) Beneﬁts: Positive outcomes achieved by\nfollowing the requirements, such as improving\nuser experience, accessibility, security and\ntrust-building with citizens.\n(c) Government organisation action: Actions\npertaining \nto \nthe \nowner \ngovernment\norganisation. These will be undertaken by the\nrespective WIM nominated by the organisation.\n(d)\nDeveloper action: Speciﬁc tasks and\nactions a developer is responsible for in order\nto comply with the guidelines and ensure the\nwebsite/app meets the desired standards of\nquality, usability and effectiveness.\n(e) Evaluator action: Refers to testing of the\nwebsite/app manually or with automated tools\nto verify conformity with this checkpoint.\nStructure\n3.1\n16\n\n--- Page 11 ---\n3. New features of GIGW 3.0\nhe key thrust of GIGW 3.0 is on \nenhancing user interface and user \nexperience \n(UI \nand \nUX) \nof \nwebsites/apps \nand \nthe \nimplementation of user-centric \ninformation architecture (IA) to ease the user \njourney and provide content as per the user \nproﬁle. To ensure the quality of content \nthroughout the lifecycle of the website, GIGW \nguides on the provisioning of a centralised \nmonitoring dashboard to identify the issues and \nprovide alerts on non-conformity. Content \ncreators must also be supported with the right \ntools and technologies for accessible content \ncreation.\nGIGW 3.0 stresses on API level integration with \nplatforms \nlike \nIndia \nPortal, \nDigiLocker, \nAadhaar-based identity, single sign-on, data \nand citizen engagement platforms, language \ntranslation tools to enable seamless content \nand data ﬂow among the diﬀerent web \ninitiatives of government organisations. Social \nmedia integration also needs to be ensured.\nQuality\n3.2\nT\n17\n\n--- Page 12 ---\n3. New features of GIGW 3.0\nccessibility guidelines for web \ncontent have been formulated by \nW3C and are known as the web \ncontent accessibility guidelines \n(WCAG). GIGW 2.0 was compliant \nwith version 2.0 of WCAG, however in the \nrecent past WCAG has been upgraded to \nversion 2.1 which inherits its requirement from \nWCAG 2.0 with additional guidelines to \nimprove accessibility guidance for three major \ngroups: users with cognitive or learning \ndisabilities, users with low vision and users with \ndisabilities on mobile devices.\nGIGW 3.0 has been upgraded to include these \nadditional \nrequirements \nto \nensure \nthat \nwebsites/ apps can be used by the widest \npossible audience. The current version ensures \nconformity with Level AA of WCAG 2.1. In all 17 \nnew success criteria have been added to the \nnew version.\nAccessibility\n3.3\nA\n18\n\n--- Page 13 ---\n3. New features of GIGW 3.0\nchapter \non \ncybersecurity, \nformulated by CERT-In, has also \nbeen incorporated which relates \nto websites, web portals, web \napplications and mobile apps. \nThe \nchapter \nfocuses \non \nprotecting web resources from unauthorised \nuse, \naccess, \nchanges, \ndestruction, \nor \ndisruption. It also guides on the prevention of \nleakage of sensitive information like passwords, \nemail addresses and credit card details, which \ncause both personal embarrassment and \nﬁnancial risks.\nIt deals with all aspects of security starting \nfrom design, coding and implementation to \ntesting \nand \ndeployment, \nwhich \nprevent \nmalfunctioning, phishing, cyber-crimes or \ncyberattacks to avoid data loss of the \norganisations or users.\nIt is based on the best industry security \npractices and guidelines such as ISO 27001, the \nApplication Security Veriﬁcation Standard \n(ASVS) issued by Open Web Application \nSecurity Project (OWASP), OWASP Top 10 \nvulnerabilities and the Center for Internet \nSecurity (CIS) benchmarks as per the prevailing \nsecurity policy.\nThis chapter must be read in conjunction with \nthe guidance and advisories issued by CERT-In \nfrom time to time, which should be treated as \nupdates to the guidance contained in the \nchapter. \nGovernment organisations must continue to \nobtain a “safe to host” certiﬁcate issued by the \ncybersecurity \nauditors \nempanelled \nby \nCERT-In/STQC or the auditors of STQC or NIC.\nCybersecurity\n3.4\nA\n19\n\n--- Page 14 ---\n3. New features of GIGW 3.0\nhe chapter on lifecycle management deals with the policies, processes and plans that \nthe department has to put in place to guide the website management team in \nmaintain the quality, accessibility security of the website throughout its lifecycle. It \nalso stresses on the need for dedicated Web information Manager who is a senior \nofﬁcial from the department to head the website management team.\nLifecycle management\n3.5\nT\n20\n\n--- Page 15 ---\n3. New features of GIGW 3.0\nisk mitigation is one of the \nimportant \ncriteria \nbehind \nthe \nformulation \nof \nany \nstandard/ \nguideline. The new version of the \nguidelines outlines the risk factors \nassociated with non-conformity with each \nsection of these guidelines. They have also \nbeen mapped with each guideline and \npresented in the conformity matrix.\nTherefore, while the description of each \nguideline informs the users about the beneﬁts \nof conformance the conformity matrix will \nmake the users aware of the risk involved in \ncase, they fail to meet the guideline.\nRisk factors and their mitigations\n3.6\nR\n21",
+      "source_type": "pdf",
+      "ocr_confidence": 1.0,
+      "block_count": 552,
+      "blocks": [
+        {
+          "text": "--- Page 1 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "1. Introduction",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "n recent years, digital technologies have",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "increasingly contributed to economic",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "growth and citizen empowerment.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "These",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "technologies",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "have",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "become",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "ubiquitous in everyday life and enable",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "people to access various services from the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "comfort of their homes. Government has",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "established web presence through multiple",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites, web portals, web applications and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "mobile apps that oﬀer information and services",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to the public. However, inconsistency in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "conventions,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "layout",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "standards,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "navigation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "strategies and technologies adopted can",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "reduce the eﬀectiveness of websites/apps.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "In this context, the National Informatics Centre",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(NIC) formulated the Guidelines for Indian",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government Websites (GIGW) in the year 2009.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GIGW aims to ensure quality and accessibility of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government guidelines, by oﬀering guidance",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "on desirable practices covering the entire",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "lifecycle of websites, web portals and web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "applications, right from conceptualisation and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "design to their development, maintenance and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "management.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "The",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Department",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Administrative Reforms and Public Grievances",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "made the same a part of the Central Secretariat",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Manual of Oﬃce Procedure.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "The second version of GIGW (GIGW 2.0) was",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "developed in 2019, taking into account",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "feedback from and consultations with industry,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "I",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Introduction",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "1.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "7",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 2 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "1. Introduction",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "society and government organisations. GIGW",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2.0 took note of the standards evolved by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "international bodies like the world-wide web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "consortium (W3C) and advancements in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "technology. It also included guidance on mobile",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "apps.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "This version is the third version of GIGW (GIGW",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.0). While the earlier versions were formulated",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "in-house with external inputs, GIGW 3.0 has",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "been formulated jointly with Standardisation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Testing",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Quality",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Certiﬁcation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(STQC)",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Directorate of the Ministry of Electronics and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Information Technology and Indian Computer",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Emergency Response Team (CERT-In), so that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the experience of conformity with GIGW",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "gathered by the STQC Directorate auditors and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the cybersecurity experience and knowledge of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "CERT-In also inform the GIGW. As in earlier",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "versions, GIGW 3.0 too has also been formulated",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "in association with industry and experts.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "The key thrust of GIGW 3.0 is on oﬀering speciﬁc",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guidance to government organisations on how",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to improve the user interface and user",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "experience (UI and UX), by incorporating",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "features such as intuitive page loading (using AI",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and analytics) based on user journey and user",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "proﬁle,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "using",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "state-of-the-art",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "content",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "management",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "system",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(CMS),",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "user-centric",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "information",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "architecture",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(IA),",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "centralised",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "monitoring dashboard to identify and provide",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "alerts",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "on",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "non-conformity",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "technical",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "enablement of all content creators and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "publishers.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GIGW 3.0 also signiﬁcantly enhances the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guidance on the accessibility and usability of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "mobile apps, especially by oﬀering speciﬁc",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guidance to government organisations on how",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to leverage public digital infrastructure devised",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "for whole-of-government delivery of services,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "beneﬁts and information. These cover aspects",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "such as API level integration for use of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "integration with social media, India Portal,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "DigiLocker, Aadhaar-based identity, single",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "sign-on, data sharing in open formats on the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government’s data platform, government’s",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "scheme discovery platform, government’s",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "citizen engagement platform MyGov, AI-based",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Indian language translation tools, seamless",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "content/data",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "access",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "across",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "web-based",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "solutions of government organisations. GIGW",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.0 oﬀers upgraded guidelines on accessibility",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of websites and apps, with a view to make",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "access to cyberspace more inclusive. In view of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "incorporation of comprehensive guidance in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "this version on apps as well (in addition to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites), this version is titled “Guidelines for",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Indian",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government Websites",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Apps”.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "However, since the acronym GIGW gained wide",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "currency, the acronym has been retained, with",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the letter “W” being signifying “Websites and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Apps”.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "A chapter on cybersecurity, formulated by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "CERT-In, has also been incorporated so that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GIGW can serve as a single point of reference on",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "all the relevant aspects — quality, accessibility",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and security — relating to websites, web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "portals, web applications and mobile apps.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Since cybersecurity requirements undergo",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "continuous evolution in light of emerging",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "threat",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "scenarios,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "threat",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "vectors",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "technologies,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "CERT-In",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "continuously",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "issues",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "updated guidance and advisories to address the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "8",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 3 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "same. Such guidance and advisories issued by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "CERT-In from time to time should be treated as",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "updates to the guidance contained in the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "chapter on cybersecurity and any assessments",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "or audit carried out with reference to GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "should also be cognizant of the same. Further,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "while government organisations may continue",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to establish conformity with GIGW 3.0 by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "obtaining Certiﬁed Quality Website (CQW)",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "certiﬁcation from the STQC Directorate, the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "certiﬁcation of cybersecurity aspects by STQC",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "may be done on the basis of the “safe to host”",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "certiﬁcate issued by the cybersecurity auditors",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "empanelled by CERT-In/STQC or the auditors of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "STQC or NIC.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "To make the guidelines more readily usable,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "which entity/person has a role in implementing",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "a particular guideline has been identiﬁed in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "every guideline. Thus, each guideline speciﬁes",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "whether the same is to be acted upon by the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government organisation concerned or the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "developer or the evaluators.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "The eﬀectiveness of GIGW 3.0 in enhancing ease",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of living through various web-based initiatives",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of the government would depend on their",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "eﬀective implementation in letter and spirit by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "all",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "organisations",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "their",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "implementation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "evaluation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "partners.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government organisations are expected to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "carefully assess their existing websites, web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "portals, web applications and mobile apps",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "against GIGW 3.0, identify areas requiring",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "improvement,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "draw",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "up",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "time",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "bound",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "implementation plans to achieve conformity",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "with GIGW 3.0 and obtain CQW certiﬁcation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "from the STQC Directorate. Similarly, websites,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "web portals, web applications and mobile apps",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "that are at the design or implementation stage",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "may also be reviewed to ensure that their",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "design, architecture, development and scope of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "audit conform to GIGW 3.0 and requisite",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "approvals, resources etc. are tied up to ensure",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "this.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "While GIGW embodies general guidance for",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government websites, web portals, web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "applications and mobile apps, particular",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "website/app use cases may require adoption of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "higher",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "norms",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "speciﬁc",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "technologies.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government organisations may keep this in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "mind",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "while",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "formulating",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "their",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "design,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "architecture and scope and may consult NIC in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "case they desire technical advice in the matter.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "1. Introduction",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "9",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 4 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Scope",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "objective",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GUIDELINES FOR INDIAN GOVERNMENT",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "WEBSITES AND APPS",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 5 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2    Scope and objective",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2.1  Conformity to guidelines",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2.2  How to use GIGW",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 6 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2. Scope and objective",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "his",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "document",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "recommends",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "policies and guidelines for Indian",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Applications at any organisational",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "level and belonging to both",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Central",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "as",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "well",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "as",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "State",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Governments",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(including",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "district",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "administrations and local governments) for",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "making",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Indian",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites/apps",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "user-centric, more user-friendly and secure.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Conformity with these guidelines will ensure a",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "high degree of consistency and uniformity in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the content coverage, presentation security",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and accessibility and promote excellence in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government solutions in the Indian web space.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "These guidelines address common issues and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "practical",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "challenges",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "organisations face during development and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "management of their websites/apps. The",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guidelines",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "aim",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "assist",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "organisations",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "ensuring",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "their",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites/apps conform to a consistently high",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "standard. This is expected to enhance the trust",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "level",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "citizens",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "while",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "accessing",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "information",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "availing",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "services online.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Scope and objective",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "T",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "12",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 7 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2. Scope and objective",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "These guidelines have been framed with the objective to make the government websites/apps",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "conform to the essential prerequisites of the UUU trilogy of usability, user-centricity and universal",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "accessibility.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "These guidelines are based on international standards, including ISO 23026, W3C’s Web Content",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Accessibility Guidelines (WCAG 2.1) Rights of Persons with Disabilities Act, 2016, as well as the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Information Technology Act, 2000. Further, the long-standing experience of the authors in the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "design, development and management of government websites/apps as well as their knowledge of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the ground realities and challenges faced by government organisations in developing and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "managing their websites/apps, have helped signiﬁcantly in drafting these guidelines.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "These guidelines also form the basis for obtaining the Website Quality Certiﬁcation from the STQC",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Directorate.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Details",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "certiﬁcation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "scheme",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "are",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "available",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "at",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "https://www.stqc.gov.in/website-quality-certiﬁcation-0.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "These guidelines are being circulated amongst all Indian government organisations at all levels",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(Central, State and district/local). These should be followed and implemented on priority so that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the overall aim of making all Indian government websites/apps citizen-focused and user-friendly",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "may be realised.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Conformity to guidelines",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2.1",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government organisations are expected to read, understand and implement these guidelines on all",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of their web-based initiatives. In other words, all the websites/apps owned by government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "organisations must comply with these guidelines. It is recommended that browser-based intranet",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "applications should also follow these guidelines. Depending upon their speciﬁc requirements,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government organisations may draw up short-term and long-term timebound implementation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "plans for achieving conformity with these guidelines.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "How to use GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "2.2",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "13",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 8 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "New",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "features",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GUIDELINES FOR INDIAN GOVERNMENT",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "WEBSITES AND APPS",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 9 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3    New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.1    Structure",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.2   Quality",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.3   Accessibility",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.4   Cybersecurity",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.5   Lifecycle management",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.6   Risk factors and their mitigation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 10 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3. New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "T",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "he new version of the guidelines has several enhancements to make it more user",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "centric, accessible, secure and at par with the global best practices and latest",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "technological benchmarks. This version was reorganised to ease adoption and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "implementation and ensure wider conformity with GIGW. The following major",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "enhancements have been included in the current version.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "The new version of the guidelines is structured so as to reduce ambiguity and provide clarity on the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "roles and responsibilities of the implementers. The guidelines are structured under the following",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "heads:",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(a) Statement: Requirement or checkpoint to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "meet the particular guideline.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(b) Beneﬁts: Positive outcomes achieved by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "following the requirements, such as improving",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "user experience, accessibility, security and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "trust-building with citizens.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(c) Government organisation action: Actions",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "pertaining",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "owner",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "government",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "organisation. These will be undertaken by the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "respective WIM nominated by the organisation.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(d)",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Developer action: Speciﬁc tasks and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "actions a developer is responsible for in order",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to comply with the guidelines and ensure the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "website/app meets the desired standards of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "quality, usability and effectiveness.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(e) Evaluator action: Refers to testing of the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "website/app manually or with automated tools",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to verify conformity with this checkpoint.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Structure",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.1",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "16",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 11 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3. New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "he key thrust of GIGW 3.0 is on",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "enhancing user interface and user",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "experience",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(UI",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "UX)",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites/apps",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "implementation of user-centric",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "information architecture (IA) to ease the user",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "journey and provide content as per the user",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "proﬁle. To ensure the quality of content",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "throughout the lifecycle of the website, GIGW",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guides on the provisioning of a centralised",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "monitoring dashboard to identify the issues and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "provide alerts on non-conformity. Content",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "creators must also be supported with the right",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "tools and technologies for accessible content",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "creation.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GIGW 3.0 stresses on API level integration with",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "platforms",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "like",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "India",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Portal,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "DigiLocker,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Aadhaar-based identity, single sign-on, data",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and citizen engagement platforms, language",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "translation tools to enable seamless content",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and data ﬂow among the diﬀerent web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "initiatives of government organisations. Social",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "media integration also needs to be ensured.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Quality",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.2",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "T",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "17",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 12 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3. New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "ccessibility guidelines for web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "content have been formulated by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "W3C and are known as the web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "content accessibility guidelines",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(WCAG). GIGW 2.0 was compliant",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "with version 2.0 of WCAG, however in the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "recent past WCAG has been upgraded to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "version 2.1 which inherits its requirement from",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "WCAG 2.0 with additional guidelines to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "improve accessibility guidance for three major",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "groups: users with cognitive or learning",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "disabilities, users with low vision and users with",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "disabilities on mobile devices.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "GIGW 3.0 has been upgraded to include these",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "additional",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "requirements",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "ensure",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "websites/ apps can be used by the widest",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "possible audience. The current version ensures",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "conformity with Level AA of WCAG 2.1. In all 17",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "new success criteria have been added to the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "new version.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Accessibility",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.3",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "A",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "18",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 13 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3. New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "chapter",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "on",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "cybersecurity,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "formulated by CERT-In, has also",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "been incorporated which relates",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "to websites, web portals, web",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "applications and mobile apps.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "The",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "chapter",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "focuses",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "on",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "protecting web resources from unauthorised",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "use,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "access,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "changes,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "destruction,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "or",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "disruption. It also guides on the prevention of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "leakage of sensitive information like passwords,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "email addresses and credit card details, which",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "cause both personal embarrassment and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "ﬁnancial risks.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "It deals with all aspects of security starting",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "from design, coding and implementation to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "testing",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "deployment,",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "which",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "prevent",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "malfunctioning, phishing, cyber-crimes or",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "cyberattacks to avoid data loss of the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "organisations or users.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "It is based on the best industry security",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "practices and guidelines such as ISO 27001, the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Application Security Veriﬁcation Standard",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "(ASVS) issued by Open Web Application",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Security Project (OWASP), OWASP Top 10",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "vulnerabilities and the Center for Internet",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Security (CIS) benchmarks as per the prevailing",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "security policy.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "This chapter must be read in conjunction with",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the guidance and advisories issued by CERT-In",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "from time to time, which should be treated as",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "updates to the guidance contained in the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "chapter.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Government organisations must continue to",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "obtain a “safe to host” certiﬁcate issued by the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "cybersecurity",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "auditors",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "empanelled",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "by",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "CERT-In/STQC or the auditors of STQC or NIC.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Cybersecurity",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.4",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "A",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "19",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 14 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3. New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "he chapter on lifecycle management deals with the policies, processes and plans that",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the department has to put in place to guide the website management team in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "maintain the quality, accessibility security of the website throughout its lifecycle. It",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "also stresses on the need for dedicated Web information Manager who is a senior",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "ofﬁcial from the department to head the website management team.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Lifecycle management",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.5",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "T",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "20",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "--- Page 15 ---",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3. New features of GIGW 3.0",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "isk mitigation is one of the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "important",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "criteria",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "behind",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "formulation",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "any",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "standard/",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guideline. The new version of the",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guidelines outlines the risk factors",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "associated with non-conformity with each",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "section of these guidelines. They have also",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "been mapped with each guideline and",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "presented in the conformity matrix.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Therefore, while the description of each",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "guideline informs the users about the beneﬁts",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "of conformance the conformity matrix will",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "make the users aware of the risk involved in",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "case, they fail to meet the guideline.",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "Risk factors and their mitigations",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "3.6",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "R",
+          "confidence": 1.0,
+          "bbox": []
+        },
+        {
+          "text": "21",
+          "confidence": 1.0,
+          "bbox": []
+        }
+      ],
+      "file_size_bytes": 614494,
+      "mime_type": "application/pdf",
+      "created_at": "2026-02-19T06:38:53.817094+00:00",
+      "updated_at": "2026-02-19T06:38:53.817094+00:00",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
     "created_at": "2026-02-19T08:44:00+05:30",
-    "version": "1.1",
-    "total_documents": 2
+    "version": "1.0",
+    "total_documents": 4
   }
 }

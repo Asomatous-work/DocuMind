@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 # Default model — use a tiny, fast model. User can change this.
 DEFAULT_MODEL = "tinyllama"
 
-# Keep system prompt ultra-simple for tiny models
-SYSTEM_PROMPT = "Read the document text below and answer the question. Only use information from the document. Keep your answer short."
+# Ultra-simple prompt for tiny models
+SYSTEM_PROMPT = "You are a document assistant. Read the provided text and answer the question directly using ONLY that text. If not in text, say 'Not found'. Keep it short."
 
 
 class OllamaAgent:
@@ -71,26 +71,18 @@ class OllamaAgent:
                 "Run: `ollama serve` in a terminal."
             )
 
-        # Build a simple, direct prompt for small models
         if document_context:
-            # Completion-style: give the doc text, ask the question, 
-            # and start the answer so the model just continues
             augmented_message = (
-                f"Document:\n"
-                f"{document_context}\n\n"
+                f"Context:\n{document_context}\n\n"
                 f"Question: {user_message}\n"
                 f"Answer:"
             )
         else:
-            augmented_message = (
-                f"No documents are available yet. "
-                f"The user asked: {user_message}\n"
-                f"Tell them to upload or scan a document first."
-            )
+            augmented_message = f"Tell the user no document is available. Question: {user_message}"
 
-        # Stateless: each question gets fresh context, no history pollution
+        # Stateless grounded chat
         messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": "You are a direct data extractor. Use bold bullet points. If context says 'NOT FOUND', answer 'Not found'."},
             {"role": "user",   "content": augmented_message},
         ]
 

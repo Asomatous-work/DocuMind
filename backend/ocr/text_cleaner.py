@@ -104,3 +104,36 @@ def structure_for_llm(text: str, filename: str = "") -> str:
     """
     header = f"DOCUMENT: {filename}\n{'='*50}\n\n" if filename else ""
     return header + text
+
+
+def chunk_ocr_text(text: str) -> list[dict]:
+    """
+    Split the document text into structured chunks based on section markers.
+    Returns a list of dicts: {"label": "S1", "text": "..."}
+    """
+    if not text:
+        return []
+
+    # Ensure it's cleaned first
+    cleaned = clean_ocr_text(text)
+    
+    # Split by our standardized section markers (double newline + S followed by number)
+    parts = re.split(r'\n\n(?=S\d+\.)', cleaned)
+    
+    chunks = []
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+            
+        # Try to extract label (e.g., S1)
+        label_match = re.match(r'^(S\d+)\.', part)
+        if label_match:
+            label = label_match.group(1)
+            content = part[len(label)+1:].strip()
+            chunks.append({"label": label, "text": content})
+        else:
+            # Check for header or other markers
+            chunks.append({"label": "Intro", "text": part})
+            
+    return chunks

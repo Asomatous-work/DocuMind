@@ -92,13 +92,7 @@
           "label": "S15",
           "text": "Most successful attacks start with vulnerability probing: Allowing such probes to continue can raise the likelihood of a successful exploit to nearly 10O%."
         }
-      ],
-      "file_size_bytes": 80371,
-      "mime_type": "image/png",
-      "created_at": "2026-02-19T04:49:34.823051+00:00",
-      "updated_at": "2026-02-19T04:49:34.823051+00:00",
-      "tags": [],
-      "notes": ""
+      ]
     },
     {
       "id": "0b34c493",

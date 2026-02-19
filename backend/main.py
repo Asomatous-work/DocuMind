@@ -71,6 +71,15 @@ async def serve_frontend():
         return HTMLResponse(content=f.read())
 
 
+# ─── Storage Configuration ──────────────────────────────────────────────────
+
+STORAGE_DIR = os.path.join(os.path.dirname(__file__), "storage")
+IMAGES_DIR = os.path.join(STORAGE_DIR, "images")
+os.makedirs(IMAGES_DIR, exist_ok=True)
+
+# Mount storage directory to serve images
+app.mount("/storage", StaticFiles(directory=STORAGE_DIR), name="storage")
+
 # ─── Pydantic Models ─────────────────────────────────────────────────────────
 
 
@@ -117,6 +126,15 @@ async def upload_and_process(
     file_bytes = await file.read()
     file_size = len(file_bytes)
 
+    # Save image to storage for preview
+    import uuid
+    image_ext = file.filename.split(".")[-1] if "." in file.filename else "png"
+    image_filename = f"{uuid.uuid4().hex}.{image_ext}"
+    image_path = os.path.join(IMAGES_DIR, image_filename)
+    
+    with open(image_path, "wb") as f:
+        f.write(file_bytes)
+
     logger.info(f"📤 Processing upload: {file.filename} ({file_size} bytes)")
 
     # Run OCR
@@ -137,6 +155,7 @@ async def upload_and_process(
         ocr_blocks=ocr_result["blocks"],
         file_size=file_size,
         mime_type=file.content_type or "",
+        image_path=f"/storage/images/{image_filename}"
     )
 
     return {
@@ -148,6 +167,7 @@ async def upload_and_process(
             "block_count": ocr_result["block_count"],
             "avg_confidence": ocr_result["avg_confidence"],
             "processing_time": ocr_result["processing_time_seconds"],
+            "image_url": document["image_path"],
         },
     }
 
@@ -158,6 +178,22 @@ async def capture_and_process(request: CaptureRequest):
     Process a camera-captured image (sent as base64).
     """
     logger.info(f"📸 Processing camera capture: {request.filename}")
+
+    # Save to storage
+    import base64
+    import uuid
+    try:
+        header, data = request.image_base64.split(",", 1)
+        image_bytes = base64.b64decode(data)
+        
+        image_filename = f"{uuid.uuid4().hex}.jpg"
+        image_path = os.path.join(IMAGES_DIR, image_filename)
+        with open(image_path, "wb") as f:
+            f.write(image_bytes)
+    except Exception as e:
+        logger.error(f"Failed to save captured image: {e}")
+        image_bytes = b""
+        image_filename = ""
 
     try:
         ocr_result = ocr_engine.extract_from_base64(
@@ -174,6 +210,7 @@ async def capture_and_process(request: CaptureRequest):
         source_type="camera",
         ocr_confidence=ocr_result["avg_confidence"],
         ocr_blocks=ocr_result["blocks"],
+        image_path=f"/storage/images/{image_filename}" if image_filename else ""
     )
 
     return {
@@ -185,6 +222,7 @@ async def capture_and_process(request: CaptureRequest):
             "block_count": ocr_result["block_count"],
             "avg_confidence": ocr_result["avg_confidence"],
             "processing_time": ocr_result["processing_time_seconds"],
+            "image_url": document["image_path"],
         },
     }
 

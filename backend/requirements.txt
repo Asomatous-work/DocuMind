@@ -9,3 +9,5 @@ ollama==0.6.1
 aiofiles==25.1.0
 python-dateutil==2.9.0.post0
 httpx==0.28.1
+python-docx>=1.1.0
+PyMuPDF>=1.24.0

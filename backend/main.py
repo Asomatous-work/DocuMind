@@ -5,13 +5,15 @@ FastAPI backend powering the OCR Chat Interface.
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse, FileResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import os
 import logging
 import httpx
+import json
+import hashlib
 
 # Configure logging
 logging.basicConfig(
@@ -75,16 +77,6 @@ async def serve_frontend():
     with open(index_path, "r", encoding="utf-8") as f:
         return HTMLResponse(content=f.read())
 
-
-# ─── Storage Configuration ──────────────────────────────────────────────────
-
-STORAGE_DIR = os.path.join(os.path.dirname(__file__), "storage")
-IMAGES_DIR = os.path.join(STORAGE_DIR, "images")
-os.makedirs(IMAGES_DIR, exist_ok=True)
-
-# Mount storage directory to serve images
-app.mount("/storage", StaticFiles(directory=STORAGE_DIR), name="storage")
-
 # ─── Pydantic Models ─────────────────────────────────────────────────────────
 
 
@@ -116,7 +108,6 @@ async def upload_and_process(
     Images are processed via OCR; PDFs and DOCX files use direct text extraction.
     Stores the result in the knowledge base.
     """
-    import os
     ext = os.path.splitext((file.filename or "").lower())[1]
 
     # Determine if this is a native document or image
@@ -143,18 +134,29 @@ async def upload_and_process(
     # Read file bytes
     file_bytes = await file.read()
     file_size = len(file_bytes)
-
-    # Save image to storage for preview
-    import uuid
-    image_ext = file.filename.split(".")[-1] if "." in file.filename else "png"
-    image_filename = f"{uuid.uuid4().hex}.{image_ext}"
-    image_path = os.path.join(IMAGES_DIR, image_filename)
     
-    with open(image_path, "wb") as f:
-        f.write(file_bytes)
+    # Calculate checksum for duplicate detection
+    checksum = hashlib.sha256(file_bytes).hexdigest()
+    
+    # Check if this exact file already exists
+    existing_doc = knowledge_store.find_by_checksum(checksum)
+    if existing_doc:
+        logger.info(f"♻️ Duplicate file detected: {file.filename} (ID: {existing_doc['id']})")
+        return {
+            "success": True,
+            "duplicate": True,
+            "document": {
+                "id": existing_doc["id"],
+                "filename": existing_doc["filename"],
+                "extracted_text": existing_doc["extracted_text"],
+                "block_count": existing_doc["block_count"],
+                "avg_confidence": existing_doc["ocr_confidence"],
+                "processing_time": 0,
+                "created_at": existing_doc["created_at"],
+            },
+        }
 
     logger.info(f"📤 Processing upload: {file.filename} ({file_size} bytes)")
-    logger.info(f"📤 Processing upload: {file.filename} ({file_size} bytes, type={'document' if is_document else 'image'})")
 
     try:
         if is_document:
@@ -166,8 +168,13 @@ async def upload_and_process(
             )
         else:
             # Image — run through OCR engine
+            # Optimization: If it's a screenshot, use the light digital pipeline
+            current_source = source_type
+            if "screenshot" in (file.filename or "").lower():
+                current_source = "digital"
+                
             ocr_result = ocr_engine.extract_text(
-                file_bytes, source_type=source_type, detail=True
+                file_bytes, source_type=current_source, detail=True
             )
     except Exception as e:
         logger.error(f"Text extraction failed: {e}")
@@ -182,7 +189,7 @@ async def upload_and_process(
         ocr_blocks=ocr_result["blocks"],
         file_size=file_size,
         mime_type=file.content_type or "",
-        image_path=f"/storage/images/{image_filename}"
+        checksum=checksum,
     )
 
     return {
@@ -194,7 +201,7 @@ async def upload_and_process(
             "block_count": ocr_result["block_count"],
             "avg_confidence": ocr_result["avg_confidence"],
             "processing_time": ocr_result["processing_time_seconds"],
-            "image_url": document["image_path"],
+            "image_url": "", # No longer storing images
         },
     }
 
@@ -206,21 +213,32 @@ async def capture_and_process(request: CaptureRequest):
     """
     logger.info(f"📸 Processing camera capture: {request.filename}")
 
-    # Save to storage
+    # Read base64
     import base64
-    import uuid
     try:
         header, data = request.image_base64.split(",", 1)
         image_bytes = base64.b64decode(data)
-        
-        image_filename = f"{uuid.uuid4().hex}.jpg"
-        image_path = os.path.join(IMAGES_DIR, image_filename)
-        with open(image_path, "wb") as f:
-            f.write(image_bytes)
     except Exception as e:
-        logger.error(f"Failed to save captured image: {e}")
+        logger.error(f"Failed to decode base64: {e}")
         image_bytes = b""
-        image_filename = ""
+
+    # Check for duplicates even in camera captures
+    checksum = hashlib.sha256(image_bytes).hexdigest()
+    existing_doc = knowledge_store.find_by_checksum(checksum)
+    if existing_doc:
+        logger.info(f"♻️ Duplicate capture detected: {request.filename} (ID: {existing_doc['id']})")
+        return {
+            "success": True,
+            "duplicate": True,
+            "document": {
+                "id": existing_doc["id"],
+                "filename": existing_doc["filename"],
+                "extracted_text": existing_doc["extracted_text"],
+                "block_count": existing_doc["block_count"],
+                "avg_confidence": existing_doc["ocr_confidence"],
+                "processing_time": 0,
+            },
+        }
 
     try:
         ocr_result = ocr_engine.extract_from_base64(
@@ -237,7 +255,7 @@ async def capture_and_process(request: CaptureRequest):
         source_type="camera",
         ocr_confidence=ocr_result["avg_confidence"],
         ocr_blocks=ocr_result["blocks"],
-        image_path=f"/storage/images/{image_filename}" if image_filename else ""
+        checksum=checksum,
     )
 
     return {
@@ -249,15 +267,49 @@ async def capture_and_process(request: CaptureRequest):
             "block_count": ocr_result["block_count"],
             "avg_confidence": ocr_result["avg_confidence"],
             "processing_time": ocr_result["processing_time_seconds"],
-            "image_url": document["image_path"],
+            "image_url": "", # No longer storing images
         },
     }
+
+
+@app.post("/api/chat/stream")
+async def chat_stream(request: ChatRequest):
+    """
+    Stream chat response from the AI agent.
+    """
+    context = ""
+    sources = []
+    
+    if request.use_knowledge:
+        context = knowledge_store.get_context_for_query(request.message)
+        if context:
+            search_results = knowledge_store.search(request.message)
+            sources = [
+                {"filename": r["filename"], "id": r["id"]}
+                for r in search_results
+            ]
+
+    def generate():
+        # First yield the sources as a standard JSON line
+        yield json.dumps({"type": "sources", "sources": sources}) + "\n"
+        
+        response_gen = ollama_agent.chat(
+            user_message=request.message,
+            document_context=context,
+            stream=True
+        )
+        for chunk in response_gen:
+            content = chunk.get("message", {}).get("content", "")
+            if content:
+                yield json.dumps({"type": "content", "content": content}) + "\n"
+
+    return StreamingResponse(generate(), media_type="text/event-stream")
 
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     """
-    Chat with the AI agent. Optionally uses knowledge base context.
+    Chat with the AI agent (blocking).
     """
     context = ""
     sources = []

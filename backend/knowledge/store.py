@@ -72,7 +72,7 @@ class KnowledgeStore:
         ocr_blocks: list,
         file_size: int = 0,
         mime_type: str = "",
-        image_path: str = "",
+        checksum: str = "",
     ) -> dict:
         """
         Store a new OCR-processed document in the knowledge base.
@@ -90,7 +90,6 @@ class KnowledgeStore:
             "filename": filename,
             "extracted_text": cleaned_text,
             "chunks": chunks,
-            "image_path": image_path,
             "source_type": source_type,
             "ocr_confidence": ocr_confidence,
             "block_count": len(ocr_blocks),
@@ -99,6 +98,7 @@ class KnowledgeStore:
             "mime_type": mime_type,
             "created_at": now,
             "updated_at": now,
+            "checksum": checksum,
             "tags": [],
             "notes": "",
         }
@@ -134,6 +134,16 @@ class KnowledgeStore:
         self._load()
         for doc in self._data["documents"]:
             if doc["id"] == doc_id:
+                return doc
+        return None
+
+    def find_by_checksum(self, checksum: str) -> Optional[dict]:
+        """Find a document by its file checksum."""
+        if not checksum:
+            return None
+        self._load()
+        for doc in self._data["documents"]:
+            if doc.get("checksum") == checksum:
                 return doc
         return None
 
@@ -210,81 +220,63 @@ class KnowledgeStore:
         return scored_docs[:top_k]
 
     @staticmethod
-    def extract_relevant_snippet(doc: dict, query: str, window: int = 1200) -> str:
+    def extract_relevant_snippet(doc: dict, query: str) -> str:
         """
-        Section-aware snippet extraction. Handles multiple section references.
+        Search for the most relevant chunk(s) within a document for a given query.
         """
+        from rapidfuzz import fuzz, process
         query_lower = query.lower()
         
-        # 1. Try strategy: Multiple Chunk match
-        import re
-        all_refs = re.findall(r's(\d+)', query_lower)
-        if all_refs:
-            found_chunks = []
-            seen = set()
-            requested = [f"S{ref}" for ref in all_refs]
-            
-            # Map of labels to text
-            chunk_map = {c["label"]: c["text"] for c in doc.get("chunks", [])}
-            
-            for label in requested:
-                if label in seen: continue
-                if label in chunk_map:
-                    found_chunks.append(f"[{label}]: {chunk_map[label]}")
+        # 1. Keywords to focus on (ignore noise)
+        query_words = [w for w in query_lower.split() if len(w) > 3]
+        if not query_words:
+            # Fallback for very short queries
+            return doc.get("extracted_text", "")[:1200]
+
+        chunks = doc.get("chunks", [])
+        if not chunks:
+            # Document hasn't been chunked yet or failed?
+            return doc.get("extracted_text", "")[:1200]
+
+        # 2. Score each chunk based on keywords
+        chunk_scores = []
+        for i, chunk in enumerate(chunks):
+            text_lower = chunk["text"].lower()
+            score = 0
+            for word in query_words:
+                if word in text_lower:
+                    score += 50
                 else:
-                    found_chunks.append(f"[{label}]: NOT FOUND in this document.")
-                seen.add(label)
+                    # Fuzzy word search within chunk
+                    # better than searching entire doc
+                    match_score = fuzz.partial_ratio(word, text_lower)
+                    if match_score > 85:
+                        score += 30
             
-            if found_chunks:
-                return "\n\n".join(found_chunks)
+            if score > 0:
+                chunk_scores.append((score, i))
 
-        # 2. Try strategy: Context around match
-        text = doc.get("text", doc.get("extracted_text", ""))
-        text_lower = text.lower()
-        idx = text_lower.find(query_lower)
+        # 3. Handle matches
+        if not chunk_scores:
+            # No specific chunk matched well, return beginning or random sample?
+            return (f"({doc['filename']} - Overview): " + 
+                   doc.get("extracted_text", "")[:1000])
+
+        # Sort by score and pick top 1-2 chunks
+        chunk_scores.sort(key=lambda x: x[0], reverse=True)
         
-        match_quality = 0 # 0 to 1
-        if idx != -1:
-            match_quality = 1.0
-        else:
-            # Try fuzzy matching to find the best block of text
-            from rapidfuzz import fuzz, utils
-            words = text_lower.split()
-            best_score = 0
-            best_idx = 0
+        selected_parts = []
+        # Return up to 2 high-scoring chunks
+        for score, idx in chunk_scores[:2]:
+            chunk = chunks[idx]
+            selected_parts.append(f"[{chunk['label']}]: {chunk['text']}")
             
-            window_size = len(query_lower.split()) + 2
-            for i in range(len(words) - window_size):
-                window_text = " ".join(words[i:i+window_size])
-                score = fuzz.ratio(query_lower, window_text)
-                if score > best_score:
-                    best_score = score
-                    best_idx = text_lower.find(window_text)
-            
-            if best_score > 70:
-                idx = best_idx
-                match_quality = best_score / 100.0
+        return "\n\n".join(selected_parts)
 
-        if idx == -1:
-            return text[:600] # Default small window for no match
-
-        # DYNAMIC WINDOW: Higher quality match gets more context
-        # Range: 600 chars (low match) to 1500 chars (exact match)
-        dynamic_window = int(600 + (match_quality * 900))
-        
-        # Centered window
-        start = max(0, idx - dynamic_window // 2)
-        end = min(len(text), idx + dynamic_window // 2)
-        
-        snippet = text[start:end].strip()
-        if start > 0: snippet = "..." + snippet
-        if end < len(text): snippet = snippet + "..."
-        return snippet
-
-    def get_context_for_query(self, query: str, max_chars: int = 3000) -> str:
+    def get_context_for_query(self, query: str, max_chars: int = 2500) -> str:
         """
         Aggregates relevant chunks across the best matching documents.
-        Handles multi-section queries (S1, S2, S3) by finding each globally (with fuzzy).
+        Handles both section specific queries (S1, S2) and general keyword searches.
         """
         results = self.search(query, top_k=3)
         if not results:
@@ -294,43 +286,41 @@ class KnowledgeStore:
         import re
         query_lower = query.lower()
         
-        # Flex regex for section refs: matches s12, s 12, sz12, etc.
+        # 1. Look for explicit section markers in query (S1, S2, etc)
         requested_nums = re.findall(r'[sz]?\s*(\d+)', query_lower)
         requested_labels = [f"S{num}" for num in requested_nums]
         
-        if not requested_labels:
-            # Fallback to standard window extraction
-            context_parts = []
+        context_parts = []
+        found_sections = set()
+
+        # 2. Process Section matches first if requested
+        if requested_labels:
             for res in results:
-                context_parts.append(f"[From: {res['filename']}]\n" + self.extract_relevant_snippet(res, query))
-            return "\n\n---\n\n".join(context_parts)
+                chunks = {c["label"]: c["text"] for c in res.get("chunks", [])}
+                chunk_labels = list(chunks.keys())
+                
+                for req in requested_labels:
+                    # Fuzzy match requested label against this document's chunks
+                    match = process.extractOne(req, chunk_labels, scorer=fuzz.ratio)
+                    if match and match[1] > 85:
+                        matched_label = match[0]
+                        context_parts.append(f"[From: {res['filename']} - {matched_label}]\n{chunks[matched_label]}")
+                        found_sections.add(req)
 
-        # Global fuzzy section search across all top results
-        found_data = {} # label -> (text, source)
-        
+        # 3. Always add general keyword-based matches (crucial for names like 'Prakash')
+        # This will either find chunks the section logic missed, or provide general context
         for res in results:
-            chunks = {c["label"]: c["text"] for c in res.get("chunks", [])}
-            chunk_labels = list(chunks.keys())
+            snippet = self.extract_relevant_snippet(res, query)
+            # Avoid duplicating if snippet is just a section we already found
+            if snippet not in [p for p in context_parts]:
+                context_parts.append(f"[From: {res['filename']}]\n{snippet}")
+
+        # Join and truncate to stay within LLM limits
+        full_context = "\n\n---\n\n".join(context_parts)
+        if len(full_context) > max_chars:
+            full_context = full_context[:max_chars] + "... [Context truncated for length]"
             
-            for req in requested_labels:
-                if req in found_data: continue
-                # Fuzzy match requested label against this document's chunks
-                match = process.extractOne(req, chunk_labels, scorer=fuzz.ratio)
-                if match and match[1] > 85:
-                    matched_label = match[0]
-                    found_data[req] = (chunks[matched_label], res["filename"], matched_label)
-
-        # Build unified report
-        report = []
-        for req_label in requested_labels:
-            if req_label in found_data:
-                text, src, actual_label = found_data[req_label]
-                # Use the actual label from document for the report
-                report.append(f"[{actual_label}] (Source: {src}): {text}")
-            else:
-                report.append(f"[{req_label}]: NOT FOUND in any document.")
-
-        return "\n\n".join(report)
+        return full_context
 
     def get_stats(self) -> dict:
         """Get knowledge base statistics."""

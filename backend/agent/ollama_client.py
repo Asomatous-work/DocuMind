@@ -9,16 +9,16 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# Default model — use a tiny, fast model. User can change this.
-DEFAULT_MODEL = "tinyllama"
+# Default model — use Qwen2 as recently pulled by user.
+DEFAULT_MODEL = "qwen2"
 
-# Ultra-simple prompt for tiny models
+# Ultra-simple prompt for models
 SYSTEM_PROMPT = "You are a document assistant. Read the provided text and answer the question directly using ONLY that text. If not in text, say 'Not found'. Keep it short."
 
 
 class OllamaAgent:
     """
-    Local LLM agent using Ollama for document-aware conversations.
+    Local LLM agent using Ollama for document-aware conversations and OCR.
     """
 
     def __init__(self, model: str = DEFAULT_MODEL):
@@ -61,15 +61,19 @@ class OllamaAgent:
         user_message: str,
         document_context: str = "",
         stream: bool = False,
-    ) -> str:
+    ):
         """
         Send a message to the LLM with optional document context.
         """
         if not self.check_availability():
-            return (
+            error_msg = (
                 "⚠️ Ollama is not reachable at http://127.0.0.1:11434. Please ensure it is running.\n"
                 "Run: `ollama serve` in a terminal."
             )
+            if stream:
+                def gen(): yield error_msg
+                return gen()
+            return error_msg
 
         if document_context:
             augmented_message = (
@@ -87,6 +91,13 @@ class OllamaAgent:
         ]
 
         try:
+            if stream:
+                return self.client.chat(
+                    model=self.model,
+                    messages=messages,
+                    stream=True
+                )
+            
             response = self.client.chat(
                 model=self.model,
                 messages=messages,
@@ -95,7 +106,12 @@ class OllamaAgent:
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
             return assistant_message
         except Exception as e:
-            return f"⚠️ Ollama Error: {str(e)}"
+            error_msg = f"⚠️ Ollama Error: {str(e)}"
+            if stream:
+                def gen(): yield error_msg
+                return gen()
+            return error_msg
+
 
     def clear_history(self):
         """Clear conversation history."""

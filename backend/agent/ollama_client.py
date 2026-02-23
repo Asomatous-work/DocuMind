@@ -9,8 +9,8 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# Default model — use a tiny, fast model. User can change this.
-DEFAULT_MODEL = "tinyllama"
+# Default model — Llama 3.2 (3B) is fast and capable for laptops
+DEFAULT_MODEL = "llama3.2"
 
 # Ultra-simple prompt for tiny models
 SYSTEM_PROMPT = "You are a document assistant. Read the provided text and answer the question directly using ONLY that text. If not in text, say 'Not found'. Keep it short."

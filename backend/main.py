@@ -259,24 +259,28 @@ async def chat(request: ChatRequest):
     """
     Chat with the AI agent. Optionally uses knowledge base context.
     """
-    context = ""
-    sources = []
+    try:
+        context = ""
+        sources = []
 
-    if request.use_knowledge:
-        context = knowledge_store.get_context_for_query(request.message)
-        if context:
-            search_results = knowledge_store.search(request.message)
-            sources = [
-                {"filename": r["filename"], "id": r["id"]}
-                for r in search_results
-            ]
+        if request.use_knowledge:
+            context = knowledge_store.get_context_for_query(request.message)
+            if context:
+                search_results = knowledge_store.search(request.message)
+                sources = [
+                    {"filename": r["filename"], "id": r["id"]}
+                    for r in search_results
+                ]
 
-    response = ollama_agent.chat(
-        user_message=request.message,
-        document_context=context,
-    )
+        response = ollama_agent.chat(
+            user_message=request.message,
+            document_context=context,
+        )
 
-    return ChatResponse(response=response, sources=sources)
+        return ChatResponse(response=response, sources=sources)
+    except Exception as e:
+        logger.error(f"Chat processing failed: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Internal Error: {str(e)}")
 
 
 @app.get("/api/documents")

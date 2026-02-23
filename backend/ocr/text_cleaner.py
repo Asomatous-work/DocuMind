@@ -69,7 +69,7 @@ def normalize_whitespace(text: str) -> str:
 
 def split_into_sections(text: str) -> str:
     """
-    Detect section markers like S1, S2, S3... and put each on its own line.
+    Detect section markers like S1, S2... or Page markers and put each on its own line.
     This makes the document scannable for both humans AND small LLMs.
     """
     # Pattern: S followed by number and a period or colon
@@ -78,6 +78,10 @@ def split_into_sections(text: str) -> str:
 
     # Also handle "Section X." or numbered patterns like "43.1"
     text = re.sub(r'(?<!\n)\s*(\d+\.\d+)\s*', r' [\1]\n', text)
+
+    # Handle Page markers from our PDF extractor: --- Page X ---
+    # Ensure they are surrounded by newlines
+    text = re.sub(r'(?<!\n)(--- Page \d+ ---)', r'\n\n\1\n', text)
 
     return text
 
@@ -106,9 +110,14 @@ def structure_for_llm(text: str, filename: str = "") -> str:
     return header + text
 
 
-def chunk_ocr_text(text: str) -> list[dict]:
+def chunk_ocr_text(text: str, chunk_size: int = 1000, overlap: int = 200) -> list[dict]:
     """
-    Split the document text into structured chunks based on section markers.
+    Split the document text into structured chunks.
+    Priority:
+    1. Explicit Section Markers (S1, S2...)
+    2. Page Markers (--- Page X ---)
+    3. Fallback: Sliding Window
+    
     Returns a list of dicts: {"label": "S1", "text": "..."}
     """
     if not text:
@@ -117,23 +126,83 @@ def chunk_ocr_text(text: str) -> list[dict]:
     # Ensure it's cleaned first
     cleaned = clean_ocr_text(text)
     
-    # Split by our standardized section markers (double newline + S followed by number)
-    parts = re.split(r'\n\n(?=S\d+\.)', cleaned)
-    
     chunks = []
-    for part in parts:
-        part = part.strip()
-        if not part:
-            continue
+
+    # Strategy 1: Explicit Section Markers (S1., S2.)
+    # Look for at least one "S<number>." pattern to decide if we use this strategy
+    if re.search(r'\n(S\d+)\.', cleaned):
+        # Split by our standardized section markers (double newline + S followed by number)
+        parts = re.split(r'\n\n(?=S\d+\.)', cleaned)
+        for part in parts:
+            part = part.strip()
+            if not part: continue
             
-        # Try to extract label (e.g., S1)
-        label_match = re.match(r'^(S\d+)\.', part)
-        if label_match:
-            label = label_match.group(1)
-            content = part[len(label)+1:].strip()
-            chunks.append({"label": label, "text": content})
-        else:
-            # Check for header or other markers
-            chunks.append({"label": "Intro", "text": part})
+            # Try to extract label (e.g., S1)
+            label_match = re.match(r'^(S\d+)\.', part)
+            if label_match:
+                label = label_match.group(1)
+                content = part[len(label)+1:].strip()
+                chunks.append({"label": label, "text": content})
+            else:
+                chunks.append({"label": "Intro", "text": part})
+        
+        if len(chunks) > 1:
+            return chunks
+        # If we failed to get multiple chunks despite finding a marker, fall through to next strategy
+
+    # Strategy 2: Page Markers
+    # Our PDF extractor allows us to inject "--- Page X ---"
+    if "--- Page" in cleaned:
+        # Split by page marker
+        # We look for \n--- Page <num> ---\n
+        page_pattern = r'--- Page (\d+) ---'
+        parts = re.split(page_pattern, cleaned)
+        
+        # re.split with capturing group returns [prologue, page_num, content, page_num, content...]
+        
+        # Handle prologue (text before first page marker)
+        if parts[0].strip():
+            chunks.append({"label": "Intro", "text": parts[0].strip()})
+        
+        # Iterate over the pairs (page_num, content)
+        for i in range(1, len(parts), 2):
+            page_num = parts[i]
+            content = parts[i+1].strip() if i+1 < len(parts) else ""
+            if content:
+                chunks.append({"label": f"Page {page_num}", "text": content})
+                
+        if len(chunks) > 0:
+            return chunks
+
+    # Strategy 3: Fallback Sliding Window
+    # If no structure found, chop it up
+    text_len = len(cleaned)
+    start = 0
+    chunk_idx = 1
+    
+    while start < text_len:
+        end = min(start + chunk_size, text_len)
+        
+        # Try to find a sentence break near the end to avoid cutting words/sentences
+        if end < text_len:
+            # Look for last period/newline in the overlap zone
+            lookback = cleaned[end-overlap:end]
+            last_break = max(lookback.rfind('. '), lookback.rfind('\n'))
+            if last_break != -1:
+                end = (end - overlap) + last_break + 1
+        
+        chunk_text = cleaned[start:end].strip()
+        if chunk_text:
+            chunks.append({"label": f"Part {chunk_idx}", "text": chunk_text})
+            chunk_idx += 1
             
+        start = end
+        # overlap is handled by backing up 'start' in next iteration? 
+        # Actually my logic above advances start=end. 
+        # Sliding window usually implies start = start + (chunk_size - overlap).
+        # Let's switch to standard sliding window logic step.
+        
+    if not chunks and cleaned:
+         chunks.append({"label": "Full Text", "text": cleaned})
+
     return chunks

@@ -212,12 +212,18 @@ class KnowledgeStore:
     @staticmethod
     def extract_relevant_snippet(doc: dict, query: str, window: int = 1200) -> str:
         """
-        Section-aware snippet extraction. Handles multiple section references.
+        Section-aware snippet extraction. 
+        Prioritizes:
+        1. Explicit Section references (S1, S2...)
+        2. Best matching chunk (using fuzzy keyword matching)
+        3. Fallback to sliding window on full text
         """
+        import re
+        from rapidfuzz import fuzz, utils
+
         query_lower = query.lower()
         
-        # 1. Try strategy: Multiple Chunk match
-        import re
+        # 1. Try strategy: Explicit Section Match (S1, S2...)
         all_refs = re.findall(r's(\d+)', query_lower)
         if all_refs:
             found_chunks = []
@@ -238,7 +244,39 @@ class KnowledgeStore:
             if found_chunks:
                 return "\n\n".join(found_chunks)
 
-        # 2. Try strategy: Context around match
+        # 2. Try strategy: Best Chunk Match
+        # If we have chunks, use them! They are the natural structure of the doc.
+        chunks = doc.get("chunks", [])
+        if chunks:
+            best_chunk = None
+            best_score = 0
+            
+            for chunk in chunks:
+                chunk_text = chunk["text"]
+                chunk_lower = chunk_text.lower()
+                
+                # 1. Token Set Ratio: Good for out-of-order words approx match
+                score_token = fuzz.token_set_ratio(query_lower, chunk_lower)
+                
+                # 2. Partial Ratio: Good for exact substring matches even if crowded
+                # e.g., "Dr.D.Suresh" inside "Dr. D. Suresh" might match well?
+                # Actually partial_ratio is better for "Suresh" in "Dr. Suresh Babu"
+                score_partial = fuzz.partial_ratio(query_lower, chunk_lower)
+                
+                # Take the max, but favor token_set for full query understanding
+                final_score = max(score_token, score_partial)
+                
+                if final_score > best_score:
+                    best_score = final_score
+                    best_chunk = chunk
+            
+            # Lower threshold slightly to catch "Dr.D.Suresh" vs "Dr. D. Suresh"
+            # token_set_ratio often gives 100 if all query words are present.
+            # partial_ratio gives 100 if query is a substring.
+            if best_score > 70 and best_chunk:
+                return f"[{best_chunk['label']}]: {best_chunk['text']}"
+
+        # 3. Fallback strategy: Context around match in full text
         text = doc.get("text", doc.get("extracted_text", ""))
         text_lower = text.lower()
         idx = text_lower.find(query_lower)
@@ -248,11 +286,11 @@ class KnowledgeStore:
             match_quality = 1.0
         else:
             # Try fuzzy matching to find the best block of text
-            from rapidfuzz import fuzz, utils
             words = text_lower.split()
             best_score = 0
             best_idx = 0
             
+            # Sliding window of query length
             window_size = len(query_lower.split()) + 2
             for i in range(len(words) - window_size):
                 window_text = " ".join(words[i:i+window_size])
@@ -261,18 +299,19 @@ class KnowledgeStore:
                     best_score = score
                     best_idx = text_lower.find(window_text)
             
-            if best_score > 70:
+            if best_score > 60:
                 idx = best_idx
                 match_quality = best_score / 100.0
 
         if idx == -1:
-            return text[:600] # Default small window for no match
+            # If we largely failed, return the first chunk or intro if possible, else just start of text
+            if chunks:
+                return f"[{chunks[0]['label']}]: {chunks[0]['text']}"
+            return text[:600]
 
         # DYNAMIC WINDOW: Higher quality match gets more context
-        # Range: 600 chars (low match) to 1500 chars (exact match)
         dynamic_window = int(600 + (match_quality * 900))
         
-        # Centered window
         start = max(0, idx - dynamic_window // 2)
         end = min(len(text), idx + dynamic_window // 2)
         
